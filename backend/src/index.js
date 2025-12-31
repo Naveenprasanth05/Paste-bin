@@ -5,7 +5,7 @@ import PasteRouter from "./routes/pasteRoutes.js"
 
 const app = express();
 app.use(cors({
-    origin:"*",
+    origin:"https://paste-bin-frontend.onrender.com",
     methods:['POST','GET','PUT','DELETE'],
     allowedHeaders:['Content-type','accept','Authorization']
 }));
