@@ -27,15 +27,18 @@ export default function CreatePaste() {
             toast.warning("Text field is missing!")
             return;
         }
-        if (expire < 1) {
-            toast.warning("Expiry time not be zero!")
-            return;
-        }
-        if (views < 1) {
-            toast.warning("Maxviews not be zero!")
-            return;
-        }
+
         try {
+
+            if (expire < 1) {
+                toast.warning("Expiry time not be zero!")
+                return;
+            }
+            if (views < 1) {
+                toast.warning("Maxviews not be zero!")
+                return;
+            }
+            console.log("okoko")
             setLoading(true)
             const url = `${baseurl}/pastes`;
             const response = await fetch(url, {
@@ -49,8 +52,9 @@ export default function CreatePaste() {
                     maxviews: Number(views)
                 })
             });
+            console.log("api called")
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 const data = await response.json();
                 console.log(data);
                 toast.success(data.message)
@@ -63,10 +67,11 @@ export default function CreatePaste() {
             console.log(err)
             toast.error(err)
         }
-        finally{
+        finally {
             setLoading(false)
         }
     }
+    
     return (
 
         <div className='flex flex-col justify-center items-center gap-3 bg-white w-auto h-auto text-black p-4 border border-black rounded-lg'>
